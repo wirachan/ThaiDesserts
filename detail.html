@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">รายละเอียดและส่วนประกอบขนมไทย | เสน่ห์ขนมไทย</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            thaigold: {
+              300: '#fef08a',
+              400: '#facc15',
+              500: '#eab308',
+              600: '#d4af37',
+              700: '#a16207',
+            },
+            siamruby: '#80182a',
+            siamslate: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="thai-pattern-bg min-h-screen text-slate-100 flex flex-col selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- ================= TOP NAVBAR ================= -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo & Back Link -->
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-amber-500 hover:text-slate-950 text-slate-300 border border-slate-700 hover:border-amber-400 transition-all text-xs sm:text-sm font-medium">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>กลับหน้าหลัก</span>
+        </a>
+        <a href="index.html" class="flex items-center gap-2 group">
+          <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-300 flex items-center justify-center text-slate-950 font-bold text-base shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-cookie-bite"></i>
+          </div>
+          <span class="text-lg font-bold gold-text-gradient hidden sm:inline">เสน่ห์ขนมไทย</span>
+        </a>
+      </div>
+
+      <!-- Quick Switcher & Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Quick Selector Dropdown -->
+        <div class="relative hidden md:block">
+          <select id="dessertSelect" class="bg-slate-900 border border-slate-700 text-xs text-amber-300 rounded-xl px-3 py-2 pr-8 appearance-none focus:outline-none focus:border-amber-400 cursor-pointer">
+            <!-- Populated by JS -->
+          </select>
+          <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 pointer-events-none"></i>
+        </div>
+
+        <!-- Share / Copy Link -->
+        <button id="shareBtn" title="คัดลอกลิงก์เมนูนี้" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-amber-400 border border-slate-700 text-xs font-medium flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span class="hidden sm:inline">แชร์</span>
+        </button>
+
+        <!-- Print Recipe -->
+        <button onclick="window.print()" title="พิมพ์สูตรนี้" class="p-2 sm:px-3 sm:py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-amber-400 border border-slate-700 text-xs font-medium flex items-center gap-1.5 transition">
+          <i class="fa-solid fa-print"></i>
+          <span class="hidden sm:inline">พิมพ์สูตร</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full">
+    
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-xs text-slate-400 mb-6 flex-wrap">
+      <a href="index.html" class="hover:text-amber-300 transition">หน้าแรก</a>
+      <span>/</span>
+      <a href="index.html#menu" class="hover:text-amber-300 transition">ทำเนียบขนมไทย</a>
+      <span>/</span>
+      <span id="breadcrumbCategory" class="text-amber-400">หมวดหมู่</span>
+      <span>/</span>
+      <span id="breadcrumbCurrent" class="text-slate-200 font-semibold">ชื่อขนม</span>
+    </nav>
+
+    <!-- Top Prev / Next Navigation Bar -->
+    <div class="flex items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-800">
+      <a id="prevDessertBtn" href="#" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-amber-300 hover:bg-slate-800/60 transition">
+        <i class="fa-solid fa-chevron-left"></i>
+        <span id="prevDessertName">ขนมก่อนหน้า</span>
+      </a>
+
+      <div class="text-xs text-slate-500 font-mono" id="dessertPagination">
+        เมนูที่ 1 / 14
+      </div>
+
+      <a id="nextDessertBtn" href="#" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-amber-300 hover:bg-slate-800/60 transition">
+        <span id="nextDessertName">ขนมถัดไป</span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </a>
+    </div>
+
+    <!-- Hero / Showcase Grid -->
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-12">
+      
+      <!-- Dessert Visual Column (Col 5) -->
+      <div class="lg:col-span-5 space-y-4">
+        <div class="relative rounded-3xl overflow-hidden glass-panel border border-amber-400/30 p-3 shadow-2xl group">
+          <div class="relative h-80 sm:h-96 rounded-2xl overflow-hidden bg-slate-900">
+            <img 
+              id="dessertImage" 
+              src="" 
+              alt="รูปภาพขนมไทย" 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+            
+            <!-- Category Badge -->
+            <span id="dessertCategoryBadge" class="absolute top-4 left-4 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-950/80 backdrop-blur-md text-amber-300 border border-amber-400/30 shadow">
+              <i id="dessertIcon" class="mr-1.5"></i>
+              <span id="dessertCategoryText">หมวดหมู่</span>
+            </span>
+
+            <!-- Origin Era Badge -->
+            <span id="dessertOriginBadge" class="absolute bottom-4 left-4 px-3 py-1.5 rounded-full text-xs bg-slate-900/90 backdrop-blur-md text-slate-200 border border-slate-700 flex items-center gap-1.5">
+              <i class="fa-solid fa-landmark text-amber-400"></i>
+              <span id="dessertOriginText">ยุคสมัย</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Quick Tags -->
+        <div class="flex flex-wrap gap-2 pt-1" id="dessertTags">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Dessert Main Info Column (Col 7) -->
+      <div class="lg:col-span-7 space-y-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-400 text-xs font-semibold mb-2">
+            <i class="fa-solid fa-star"></i> มรดกภูมิปัญญาของหวานไทย
+          </div>
+          <h1 id="dessertNameTh" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold gold-text-gradient tracking-tight">
+            ชื่อขนมไทย
+          </h1>
+          <p id="dessertNameEn" class="text-sm sm:text-base text-amber-200/70 font-light mt-1">
+            English Name
+          </p>
+        </div>
+
+        <p id="dessertShortDesc" class="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
+          คำอธิบายสั้นของขนม
+        </p>
+
+        <!-- Auspicious Meaning Card -->
+        <div class="glass-panel p-5 rounded-2xl border-l-4 border-amber-400 bg-gradient-to-r from-amber-500/10 via-slate-900/60 to-slate-900/60">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl bg-amber-400/20 flex items-center justify-center text-amber-400 shrink-0 mt-0.5">
+              <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+            </div>
+            <div>
+              <h3 class="text-xs uppercase tracking-wider text-amber-400 font-bold mb-1">ความหมายมงคล</h3>
+              <p id="dessertMeaning" class="text-sm text-slate-200 leading-relaxed">
+                ความหมายมงคลของขนมนี้
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4-Grid Key Specifications -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+          
+          <!-- Prep Time -->
+          <div class="glass-panel p-3.5 rounded-xl border border-slate-800 text-center">
+            <i class="fa-solid fa-clock text-amber-400 text-lg mb-1"></i>
+            <div class="text-[11px] text-slate-400">เวลาเตรียม & ปรุง</div>
+            <div id="recipeTime" class="text-xs sm:text-sm font-bold text-slate-100 mt-0.5">-</div>
+          </div>
+
+          <!-- Difficulty -->
+          <div class="glass-panel p-3.5 rounded-xl border border-slate-800 text-center">
+            <i class="fa-solid fa-chart-simple text-amber-400 text-lg mb-1"></i>
+            <div class="text-[11px] text-slate-400">ระดับความยาก</div>
+            <div id="recipeDifficulty" class="text-xs sm:text-sm font-bold text-slate-100 mt-0.5">-</div>
+          </div>
+
+          <!-- Sweetness -->
+          <div class="glass-panel p-3.5 rounded-xl border border-slate-800 text-center">
+            <i class="fa-solid fa-cubes-stacked text-amber-400 text-lg mb-1"></i>
+            <div class="text-[11px] text-slate-400">ระดับความหวาน</div>
+            <div id="recipeSweetness" class="flex items-center justify-center gap-1 mt-1">
+              <!-- Dots -->
+            </div>
+          </div>
+
+          <!-- Calories -->
+          <div class="glass-panel p-3.5 rounded-xl border border-slate-800 text-center">
+            <i class="fa-solid fa-fire text-amber-400 text-lg mb-1"></i>
+            <div class="text-[11px] text-slate-400">พลังงานแคลอรี่</div>
+            <div id="dessertCalories" class="text-xs sm:text-sm font-bold text-amber-300 mt-0.5">-</div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ================= INGREDIENTS SECTION ================= -->
+    <section class="mb-14">
+      <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
+        
+        <!-- Section Header with Servings Multiplier -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">
+              <i class="fa-solid fa-mortar-pestle"></i> สัดส่วนและวัตถุดิบ
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white">
+              ส่วนประกอบสำคัญ <span class="gold-text-gradient">(Ingredients)</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-slate-400 mt-0.5" id="servingsBaseText">
+              สูตรมาตรฐาน: สำหรับ 4 ที่
+            </p>
+          </div>
+
+          <!-- Portion Multiplier Control -->
+          <div class="flex items-center gap-1 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-700/80 self-start sm:self-center">
+            <span class="text-xs text-slate-400 px-2 font-medium">ปรับปริมาณ:</span>
+            <button onclick="setMultiplier(0.5)" id="btnMul05" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">0.5x</button>
+            <button onclick="setMultiplier(1)" id="btnMul1" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition bg-amber-400 text-slate-950 shadow">1x (ปกติ)</button>
+            <button onclick="setMultiplier(2)" id="btnMul2" class="px-3 py-1.5 rounded-xl text-xs font-semibold transition text-slate-400 hover:text-white">2x (จัดเลี้ยง)</button>
+          </div>
+        </div>
+
+        <!-- Checklist Instruction Note -->
+        <div class="flex items-center justify-between text-xs text-slate-400 bg-slate-900/50 px-4 py-2.5 rounded-xl border border-slate-800">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-amber-400"></i>
+            <span>สามารถคลิกติ๊กถูกที่วัตถุดิบเพื่อบันทึกรายการที่เตรียมพร้อมแล้วได้</span>
+          </div>
+          <button onclick="resetIngredientChecks()" class="text-amber-400 hover:text-amber-300 underline font-medium">
+            รีเซ็ตรายการ
+          </button>
+        </div>
+
+        <!-- Ingredients Interactive Cards Grid -->
+        <div class="grid sm:grid-cols-2 gap-3 sm:gap-4" id="ingredientsListContainer">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Chef Selection Tip Card -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-amber-500/10 border border-amber-400/20 flex items-start gap-3">
+          <i class="fa-solid fa-lightbulb text-amber-400 text-xl mt-0.5"></i>
+          <div class="space-y-1">
+            <h4 class="text-xs font-bold text-amber-300 uppercase tracking-wide">เคล็ดลับการเลือกซื้อวัตถุดิบ</h4>
+            <p id="chefTipText" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+              คำแนะนำการเลือกวัตถุดิบ
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= COOKING STEPS SECTION ================= -->
+    <section class="mb-14">
+      <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-6">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+          <div>
+            <div class="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 uppercase tracking-wider mb-1">
+              <i class="fa-solid fa-kitchen-set"></i> วิธีทำอย่างประณีต
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white">
+              ขั้นตอนการทำ <span class="gold-text-gradient">(Preparation Steps)</span>
+            </h2>
+          </div>
+          
+          <!-- Step Progress Indicator -->
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-slate-400">ความคืบหน้า:</span>
+            <div class="w-32 bg-slate-800 rounded-full h-2.5 overflow-hidden">
+              <div id="stepProgressBar" class="bg-gradient-to-r from-amber-500 to-yellow-300 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <span id="stepProgressText" class="text-xs font-mono text-amber-400 font-bold">0%</span>
+          </div>
+        </div>
+
+        <!-- Steps List -->
+        <div class="space-y-4" id="stepsListContainer">
+          <!-- Populated by JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= CULTURAL HISTORY & PAIRING ================= -->
+    <section class="grid md:grid-cols-2 gap-8 mb-14">
+      
+      <!-- Cultural History Card -->
+      <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-4 flex flex-col justify-between">
+        <div class="space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 uppercase tracking-wider">
+            <i class="fa-solid fa-scroll"></i> ประวัติศาสตร์และที่มา
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white">
+            เรื่องเล่าและมรดกชาวสยาม
+          </h3>
+          <p id="dessertFullDesc" class="text-sm text-slate-300 leading-relaxed font-light">
+            เรื่องเล่าความเป็นมาอย่างละเอียด
+          </p>
+        </div>
+        <div class="pt-4 border-t border-slate-800/80 text-xs text-slate-400 flex items-center gap-2">
+          <i class="fa-solid fa-landmark text-amber-400"></i>
+          <span>บันทึกประวัติศาสตร์: <strong id="originFootnote" class="text-slate-200">สมัยอยุธยา</strong></span>
+        </div>
+      </div>
+
+      <!-- Food & Tea Pairing Card -->
+      <div class="glass-panel rounded-3xl p-6 sm:p-8 border border-slate-800 shadow-xl space-y-4 flex flex-col justify-between">
+        <div class="space-y-3">
+          <div class="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 uppercase tracking-wider">
+            <i class="fa-solid fa-mug-hot"></i> ศาสตร์แห่งการรับประทาน
+          </div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white">
+            การจับคู่เครื่องดื่ม (Pairing)
+          </h3>
+          <p id="pairingText" class="text-sm text-slate-300 leading-relaxed font-light">
+            คำแนะนำเครื่องดื่มที่รับประทานคู่กัน
+          </p>
+        </div>
+        <div class="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-200 flex items-center gap-2">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>ชาอุ่นหรือเครื่องดื่มไร้น้ำตาลช่วยชูรสและตัดความหวานมันได้อย่างดีเยี่ยม</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ================= RELATED DESSERTS IN CATEGORY ================= -->
+    <section class="space-y-6 mb-12">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="text-xl sm:text-2xl font-bold text-white">
+            ขนมอื่นๆ ในหมวด <span id="relatedCategoryTitle" class="gold-text-gradient">เดียวกัน</span>
+          </h3>
+          <p class="text-xs text-slate-400">สำรวจเมนูที่น่าสนใจเพิ่มเติม</p>
+        </div>
+        <a href="index.html#menu" class="text-xs text-amber-400 hover:text-amber-300 underline font-medium">
+          ดูทั้งหมด &rarr;
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="relatedDessertsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="border-t border-slate-800/80 bg-slate-950/80 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 space-y-2">
+      <div class="flex items-center justify-center gap-2">
+        <span class="gold-text-gradient font-bold text-sm">เสน่ห์ขนมไทย</span>
+        <span>•</span>
+        <span>Thai Dessert Heritage</span>
+      </div>
+      <p>อนุรักษ์และเผยแพร่มรดกภูมิปัญญาทางวัฒนธรรมและตำรับความหวานของไทย</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification for Share / Copy -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-2 text-xs">
+    <i class="fa-solid fa-check"></i>
+    <span id="toastMessage">คัดลอกลิงก์สำเร็จ!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="detail.js"></script>
+</body>
+</html>

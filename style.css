@@ -173,3 +173,28 @@ body {
   appearance: none;
 }
 
+/* Print Styles */
+@media print {
+  header, footer, #prevDessertBtn, #nextDessertBtn, #shareBtn, #btnMul05, #btnMul1, #btnMul2, #relatedCategoryTitle, #relatedDessertsGrid, .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+  .glass-panel, .glass-panel-gold {
+    background: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: none !important;
+    color: #111827 !important;
+  }
+  .gold-text-gradient {
+    color: #b45309 !important;
+    -webkit-text-fill-color: initial !important;
+    background: none !important;
+  }
+  h1, h2, h3, h4, p, span, div {
+    color: #1f2937 !important;
+  }
+}
+

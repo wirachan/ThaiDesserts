@@ -267,13 +267,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }).join('')}
               </div>
 
-              <!-- Action button -->
-              <button 
-                onclick="openModalById(${dessert.id})"
-                class="w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-gradient-to-r hover:from-amber-500 hover:to-yellow-400 text-slate-200 hover:text-slate-950 border border-slate-700 hover:border-amber-400 transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-book-open text-xs"></i>
-                <span>ดูประวัติ & ส่วนผสม</span>
-              </button>
+              <!-- Action buttons -->
+              <div class="grid grid-cols-2 gap-2">
+                <button 
+                  onclick="openModalById(${dessert.id})"
+                  class="py-2.5 px-3 rounded-xl text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 hover:border-amber-400/50 transition-all flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-eye text-[11px]"></i>
+                  <span>ดูเรื่องราวย่อ</span>
+                </button>
+                <a 
+                  href="detail.html?id=${dessert.id}"
+                  class="py-2.5 px-3 rounded-xl text-xs font-semibold bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 shadow-sm shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-1.5">
+                  <i class="fa-solid fa-mortar-pestle text-[11px]"></i>
+                  <span>สูตร & ส่วนผสม</span>
+                </a>
+              </div>
             </div>
 
           </div>
@@ -465,15 +473,19 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="text-xs text-amber-200/70">${chosen.nameEn}</p>
             <p class="text-xs text-slate-300 leading-relaxed">${chosen.shortDesc}</p>
             
-            <div class="pt-2 flex flex-wrap items-center gap-3">
+            <div class="pt-2 flex flex-wrap items-center gap-2 sm:gap-3">
+              <a 
+                href="detail.html?id=${chosen.id}" 
+                class="px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-amber-500 to-yellow-300 text-slate-950 shadow hover:scale-105 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-mortar-pestle"></i>
+                <span>ดูสูตรและส่วนประกอบเต็ม</span>
+              </a>
               <button 
                 onclick="openModalById(${chosen.id})" 
-                class="px-4 py-2 rounded-lg text-xs font-semibold bg-gradient-to-r from-amber-500 to-yellow-300 text-slate-950 shadow hover:scale-105 transition">
-                <i class="fa-solid fa-sparkles mr-1"></i> ดูเรื่องราว & ส่วนผสม
+                class="px-3 py-2 rounded-xl text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-1">
+                <i class="fa-solid fa-eye text-xs"></i>
+                <span>ดูเรื่องราวย่อ</span>
               </button>
-              <span class="text-xs text-amber-300/80 italic font-light">
-                <i class="fa-solid fa-quote-left mr-1"></i> ${chosen.meaning.slice(0, 45)}...
-              </span>
             </div>
           </div>
         </div>
@@ -582,13 +594,22 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
         </div>
 
-        <!-- Tags -->
-        <div class="pt-3 border-t border-slate-800 flex flex-wrap gap-2">
-          ${item.tags.map(t => `
-            <button onclick="closeModal(); filterByTag('${t}')" class="text-xs text-amber-400/80 hover:text-amber-300 hover:underline">
-              #${t}
-            </button>
-          `).join('')}
+        <!-- Tags & Full Detail Link -->
+        <div class="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+            ${item.tags.map(t => `
+              <button onclick="closeModal(); filterByTag('${t}')" class="text-xs text-amber-400/80 hover:text-amber-300 hover:underline">
+                #${t}
+              </button>
+            `).join('')}
+          </div>
+
+          <a 
+            href="detail.html?id=${item.id}"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-bold bg-gradient-to-r from-amber-500 to-yellow-300 text-slate-950 shadow-md shadow-amber-500/20 hover:scale-105 transition-all text-xs">
+            <i class="fa-solid fa-mortar-pestle"></i>
+            <span>เปิดหน้ารายละเอียดและสูตรเต็ม &rarr;</span>
+          </a>
         </div>
 
       </div>
