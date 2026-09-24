@@ -1,0 +1,175 @@
+/* เสน่ห์ขนมไทย - Custom Stylesheet */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;1,600&display=swap');
+
+:root {
+  --primary-gold: #d4af37;
+  --gold-glow: rgba(212, 175, 55, 0.4);
+  --deep-ruby: #7a1f28;
+  --dark-slate: #121826;
+  --thai-gold-dark: #b8860b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  scroll-behavior: smooth;
+  background-color: #0b0f19;
+  color: #f1f5f9;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
+}
+
+/* Luxury Thai Gold Gradient */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #fef08a 0%, #facc15 35%, #eab308 70%, #ca8a04 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-gradient {
+  border-image: linear-gradient(to right, #d4af37, #fef08a, #ca8a04) 1;
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-gold {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.08), rgba(15, 23, 42, 0.75));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+
+/* Glow effects */
+.glow-gold {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
+}
+
+.glow-gold-hover:hover {
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
+  transform: translateY(-4px);
+}
+
+/* Pattern Overlay */
+.thai-pattern-bg {
+  background-color: #0d121f;
+  background-image: radial-gradient(rgba(212, 175, 55, 0.06) 1px, transparent 1px), radial-gradient(rgba(255, 255, 255, 0.03) 1px, #0d121f 1px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+}
+
+/* Pulse animation for randomizer dice/sparkle */
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+
+/* Custom Card Hover */
+.dessert-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dessert-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Modal Animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal {
+  animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Badge Sweetness Star */
+.sweetness-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 3px;
+}
+
+.sweetness-active {
+  background: #f59e0b;
+  box-shadow: 0 0 6px #f59e0b;
+}
+
+.sweetness-inactive {
+  background: #475569;
+}
+
+/* Search Term Highlighting */
+.search-highlight {
+  background-color: rgba(245, 158, 11, 0.35);
+  color: #fef08a;
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+}
+
+/* Quick Filter Tag Chips */
+.tag-chip {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.tag-chip:hover {
+  transform: translateY(-2px);
+  border-color: #facc15;
+  color: #fef08a;
+}
+.tag-chip.active {
+  background-color: rgba(245, 158, 11, 0.25);
+  border-color: #facc15;
+  color: #fef08a;
+  font-weight: 600;
+}
+
+/* Custom Select Dropdowns */
+.select-custom {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d4af37' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-repeat: no-repeat;
+  background-size: 1.25em 1.25em;
+  padding-right: 2.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+

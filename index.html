@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เสน่ห์ขนมไทย | มรดกแห่งรสชาติและภูมิปัญญาอันประณีต</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            thaigold: {
+              300: '#fef08a',
+              400: '#facc15',
+              500: '#eab308',
+              600: '#d4af37',
+              700: '#a16207',
+            },
+            siamruby: '#80182a',
+            siamslate: '#0f172a'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="thai-pattern-bg min-h-screen text-slate-100 flex flex-col selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-300 flex items-center justify-center text-slate-950 font-bold text-xl shadow-lg shadow-amber-500/30 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-cookie-bite"></i>
+        </div>
+        <div>
+          <div class="text-xl sm:text-2xl font-bold tracking-wide gold-text-gradient">เสน่ห์ขนมไทย</div>
+          <p class="text-xs text-amber-200/70 font-light -mt-1 hidden sm:block">Thai Dessert Heritage</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="#hero" class="text-slate-300 hover:text-amber-400 transition-colors">หน้าแรก</a>
+        <a href="#randomizer" class="text-slate-300 hover:text-amber-400 transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> สุ่มเมนู
+        </a>
+        <a href="#menu" class="text-slate-300 hover:text-amber-400 transition-colors">รายการขนม</a>
+        <a href="#culture" class="text-slate-300 hover:text-amber-400 transition-colors">เกร็ดความรู้</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="flex items-center gap-3">
+        <a href="#menu" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 shadow-md shadow-amber-500/20 hover:shadow-amber-500/40 hover:scale-105 transition-all">
+          <i class="fa-solid fa-magnifying-glass"></i> ค้นหาขนม
+        </a>
+        
+        <!-- Mobile Menu Toggle -->
+        <button id="mobileMenuBtn" aria-label="เปิดเมนู" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-amber-400 hover:bg-slate-800 transition">
+          <i class="fa-solid fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 border-t border-slate-800 bg-slate-900/95 backdrop-blur-md">
+      <a href="#hero" class="block py-2 px-3 rounded-md text-slate-200 hover:bg-slate-800 hover:text-amber-400">หน้าแรก</a>
+      <a href="#randomizer" class="block py-2 px-3 rounded-md text-slate-200 hover:bg-slate-800 hover:text-amber-400">สุ่มเมนูประจำวัน</a>
+      <a href="#menu" class="block py-2 px-3 rounded-md text-slate-200 hover:bg-slate-800 hover:text-amber-400">รายการขนมทั้งหมด</a>
+      <a href="#culture" class="block py-2 px-3 rounded-md text-slate-200 hover:bg-slate-800 hover:text-amber-400">เกร็ดภูมิปัญญาไทย</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- ================= HERO SECTION ================= -->
+    <section id="hero" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-32">
+      <!-- Glow orbs background -->
+      <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-2/3 right-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Text -->
+          <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs sm:text-sm font-medium tracking-wide">
+              <i class="fa-solid fa-award text-amber-400"></i> มรดกภูมิปัญญาทางวัฒนธรรมไทย
+            </div>
+            
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+              เสน่ห์ขนมไทย <br>
+              <span class="gold-text-gradient">หวานละมุน รสชาติแห่งวัฒนธรรม</span>
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+              ร่วมสัมผัสความประณีต วิจิตรบรรจง และความหมายมงคลที่ซ่อนอยู่ในขนมไทยโบราณและชาววัง คัดสรรตำรับรสเลิศ พร้อมเรื่องราวทางประวัติศาสตร์ที่คุณอาจไม่เคยรู้
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+              <a href="#randomizer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-semibold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 text-slate-950 shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:-translate-y-0.5 transition-all text-sm sm:text-base">
+                <i class="fa-solid fa-dice text-lg"></i> วันนี้กินอะไรดี? (สุ่มขนม)
+              </a>
+              <a href="#menu" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-medium bg-slate-800/80 hover:bg-slate-700/80 text-slate-200 border border-slate-700 hover:border-amber-400/50 transition-all text-sm sm:text-base">
+                <i class="fa-solid fa-compass"></i> สำรวจเมนูทั้งหมด
+              </a>
+            </div>
+
+            <!-- Stats Highlight -->
+            <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-800/80 max-w-lg mx-auto lg:mx-0">
+              <div class="text-center lg:text-left">
+                <div class="text-2xl sm:text-3xl font-bold text-amber-400">14+</div>
+                <div class="text-xs text-slate-400 mt-0.5">เมนูคัดสรรชั้นเลิศ</div>
+              </div>
+              <div class="text-center lg:text-left">
+                <div class="text-2xl sm:text-3xl font-bold text-amber-400">4</div>
+                <div class="text-xs text-slate-400 mt-0.5">หมวดหมู่เอกลักษณ์</div>
+              </div>
+              <div class="text-center lg:text-left">
+                <div class="text-2xl sm:text-3xl font-bold text-amber-400">100%</div>
+                <div class="text-xs text-slate-400 mt-0.5">กลิ่นอายชาวสยาม</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Visual Feature Card -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-md">
+              <div class="absolute -inset-1.5 bg-gradient-to-r from-amber-500 to-yellow-600 rounded-3xl blur-xl opacity-30 animate-pulse"></div>
+              
+              <div class="relative rounded-2xl overflow-hidden glass-panel border border-amber-400/30 p-5 shadow-2xl">
+                <div class="relative h-64 sm:h-72 rounded-xl overflow-hidden mb-5">
+                  <img src="thong-yib.png" alt="ขนมทองหยิบ" class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500">
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                  <span class="absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500 text-slate-950 shadow">
+                    ✨ ขนมมงคลตำรับชาววัง
+                  </span>
+                  <div class="absolute bottom-3 left-4 right-4">
+                    <h3 class="text-xl font-bold text-white">ทองหยิบ</h3>
+                    <p class="text-xs text-amber-300">Thong Yib · Golden Egg Yolk Flowers</p>
+                  </div>
+                </div>
+
+                <div class="space-y-3">
+                  <p class="text-xs text-slate-300 line-clamp-2">
+                    ดอกไม้สีทองจากไข่แดงที่จับจีบอย่างประณีต เคลือบน้ำเชื่อมใสแวววาว หวานละมุนและเป็นสิริมงคล
+                  </p>
+                  <div class="flex items-center justify-between pt-2 border-t border-slate-700/60 text-xs">
+                    <span class="text-amber-400"><i class="fa-solid fa-heart mr-1 text-red-400"></i> นิยมสูงสุด</span>
+                    <button onclick="openModalById(1)" class="text-amber-300 hover:text-amber-200 underline font-medium">ดูประวัติและความหมาย &rarr;</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RANDOMIZER SECTION ================= -->
+    <section id="randomizer" class="py-16 bg-slate-900/60 border-y border-slate-800 relative">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-medium mb-3">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> เครื่องมือช่วยตัดสินใจ
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl font-bold mb-3">
+          วันนี้กินขนมไทยอะไรดี?
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8">
+          หากเลือกไม่ถูกว่าจะเติมความหวานด้วยเมนูไหนดี ให้วงล้อแห่งขนมไทยช่วยแนะนำเมนูมงคลและรสเลิศให้คุณ!
+        </p>
+
+        <!-- Randomizer Action Card -->
+        <div class="glass-panel-gold rounded-2xl p-6 sm:p-8 max-w-2xl mx-auto shadow-xl">
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+            <button id="randomizeBtn" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl text-base font-bold bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 text-slate-950 shadow-lg shadow-amber-500/30 hover:shadow-amber-500/50 hover:scale-105 active:scale-95 transition-all">
+              <i class="fa-solid fa-dice text-2xl animate-bounce"></i>
+              <span>กดสุ่มขนมแนะนำตอนนี้!</span>
+            </button>
+          </div>
+
+          <!-- Random Result Display Box -->
+          <div id="randomResult" class="hidden transition-all duration-500">
+            <!-- Content will be injected dynamically -->
+          </div>
+          
+          <p id="randomizerHint" class="text-xs text-slate-400">
+            คลิกปุ่มด้านบนเพื่อสุ่มเมนู พร้อมดูระดับความหวานและความหมายมงคล
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================= MENU & SHOWCASE SECTION ================= -->
+    <section id="menu" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-3">
+          ทำเนียบ <span class="gold-text-gradient">สำรับขนมไทย</span> ยอดนิยม
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base">
+          ค้นหาและสำรวจขนมไทยเลิศรส กรองตามหมวดหมู่ หรือพิมพ์ค้นหาตามชื่อขนมและวัตถุดิบที่คุณชื่นชอบ
+        </p>
+      </div>
+
+      <!-- Filters & Search Control Panel -->
+      <div class="space-y-6 mb-10 max-w-5xl mx-auto">
+        
+        <!-- Category Pill Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3" id="categoryFilters">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Search, Sweetness & Sorting Control Box -->
+        <div class="glass-panel p-4 sm:p-5 rounded-2xl border border-slate-700/80 shadow-lg space-y-4">
+          
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-center">
+            
+            <!-- Live Search Input (Col 6) -->
+            <div class="md:col-span-6 relative">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input 
+                type="text" 
+                id="searchInput" 
+                placeholder="ค้นหาชื่อขนม, วัตถุดิบ (เช่น ทองหยิบ, กะทิ, ไข่แดง)..." 
+                class="w-full pl-10 pr-9 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition"
+              >
+              <button id="clearSearchBtn" aria-label="ล้างคำค้นหา" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-amber-400">
+                <i class="fa-solid fa-circle-xmark"></i>
+              </button>
+            </div>
+
+            <!-- Sweetness Filter Dropdown (Col 3) -->
+            <div class="md:col-span-3 relative">
+              <select 
+                id="sweetnessFilter" 
+                class="select-custom w-full px-3 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-amber-400 transition cursor-pointer">
+                <option value="all">🍯 ทุกระดับความหวาน</option>
+                <option value="low">🌱 หวานน้อย (ระดับ 1-2)</option>
+                <option value="medium">🌸 หวานปานกลาง (ระดับ 3)</option>
+                <option value="high">✨ หวานฉ่ำเข้มข้น (ระดับ 4-5)</option>
+              </select>
+            </div>
+
+            <!-- Sorting Dropdown (Col 3) -->
+            <div class="md:col-span-3 relative">
+              <select 
+                id="sortFilter" 
+                class="select-custom w-full px-3 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-amber-400 transition cursor-pointer">
+                <option value="default">⚡ เรียงลำดับ: แนะนำ</option>
+                <option value="name-asc">🔤 ชื่อขนม: ก &rarr; ฮ</option>
+                <option value="sweetness-asc">🍬 ความหวาน: น้อย &rarr; มาก</option>
+                <option value="sweetness-desc">🍭 ความหวาน: มาก &rarr; น้อย</option>
+                <option value="calories-asc">🥗 แคลอรี่: น้อย &rarr; มาก</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Quick Search Tags Bar -->
+          <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-800/80 text-xs">
+            <span class="text-slate-400 flex items-center gap-1 font-medium">
+              <i class="fa-solid fa-tags text-amber-400"></i> แท็กค้นหาด่วน:
+            </span>
+            <div id="quickTags" class="flex flex-wrap gap-1.5">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Active Filter Badges & Results Summary -->
+        <div class="flex flex-wrap items-center justify-between gap-3 px-1">
+          <div id="activeFiltersContainer" class="flex flex-wrap items-center gap-2">
+            <!-- Active filter chips injected via JS -->
+          </div>
+
+          <div class="text-xs sm:text-sm text-slate-400 flex items-center gap-2 ml-auto">
+            <span>ผลการค้นหา:</span>
+            <span id="dessertCountBadge" class="px-2.5 py-0.5 rounded-full bg-amber-400/20 text-amber-300 font-semibold">14 เมนู</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Dessert Cards Grid -->
+      <div id="dessertGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Injected dynamically via app.js -->
+      </div>
+
+      <!-- Empty State -->
+      <div id="emptyState" class="hidden text-center py-16 px-4">
+        <div class="w-20 h-20 mx-auto rounded-full bg-slate-800 flex items-center justify-center text-slate-500 text-3xl mb-4">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <h3 class="text-xl font-bold text-slate-300 mb-1">ไม่พบขนมที่คุณค้นหา</h3>
+        <p class="text-slate-500 text-sm mb-5">ลองค้นหาด้วยคำอื่น หรือกดรีเซ็ตตัวกรองเพื่อดูขนมทั้งหมด</p>
+        <button id="resetFilterBtn" class="px-5 py-2.5 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/40 text-sm font-medium transition">
+          ดูขนมทั้งหมด
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ================= HERITAGE & CULTURE SECTION ================= -->
+    <section id="culture" class="py-20 bg-slate-900/70 border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-400/10 text-amber-400 border border-amber-400/20">
+            ภูมิปัญญาอันทรงคุณค่า
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-bold mt-3 mb-4">
+            เกร็ดน่ารู้ & <span class="gold-text-gradient">มนต์เสน่ห์แห่งขนมไทย</span>
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base">
+            ขนมไทยมิใช่เพียงของหวาน หากแต่เป็นบันทึกทางประวัติศาสตร์ วัฒนธรรม และสุนทรียะแห่งความประณีต
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8" id="cultureCardsContainer">
+          <!-- Populated by JS / Data -->
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= DETAIL MODAL ================= -->
+  <div id="dessertModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto">
+    <div class="relative w-full max-w-2xl bg-slate-900 border border-amber-500/30 rounded-2xl shadow-2xl overflow-hidden my-8 animate-modal">
+      
+      <!-- Close Button -->
+      <button id="closeModalBtn" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-slate-950/60 hover:bg-slate-950/90 text-white flex items-center justify-center transition border border-white/20">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <!-- Modal Content Body -->
+      <div id="modalBody">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-950 border-t border-slate-800/80 py-12 text-slate-400 text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center font-bold">
+          <i class="fa-solid fa-cookie-bite"></i>
+        </div>
+        <div>
+          <span class="font-bold text-slate-200">เสน่ห์ขนมไทย</span>
+          <p class="text-xs text-slate-500">เว็บไซต์เผยแพร่ความงดงามและภูมิปัญญาขนมไทย</p>
+        </div>
+      </div>
+
+      <div class="text-center md:text-right text-xs space-y-1">
+        <p>สร้างสรรค์ขึ้นด้วยความรักในอาหารและวัฒนธรรมไทย</p>
+        <p class="text-slate-500">&copy; 2026 Thai Dessert Showcase. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" aria-label="กลับสู่ด้านบน" class="fixed bottom-6 right-6 z-30 p-3 rounded-full bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/30 opacity-0 pointer-events-none hover:bg-amber-400 transition-all">
+    <i class="fa-solid fa-arrow-up text-lg"></i>
+  </button>
+
+  <!-- Script Files -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
